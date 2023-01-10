@@ -1,0 +1,1 @@
+{"name":"Local: tree","url":"/home/noilinux/下载/Codeset/NewHLOJ/tree.cpp","tests":[{"id":1673147130444,"input":"6 \n0 0 1 2 3 3 \n1 2 \n2 3 \n2 4 \n1 5 \n5 6","output":"6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/noilinux/下载/Codeset/NewHLOJ/tree.cpp","group":"local","local":true}

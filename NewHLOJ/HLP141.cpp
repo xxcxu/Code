@@ -14,9 +14,9 @@ T read()
     return f ? ~x + 1 : x;
 }
 const int N = 2e5 + 5;
-int siz[N], fa[N][20], val[N][20], son[N], dfn[N], top[N], tot, cnt, n, dep[N], c[N], st[N], m, T, ff[N], q;
+int siz[N], fa[N][20], val[N][20], son[N], dfn[N], top[N], tot, cnt, n, dep[N], c[N], st[N], m, ff[N], q;
 vector<int> E[N], G[N], pos[N];
-ll t[N << 2], mx1[N], mx2[N], w[N], w1[N], w2[N];
+ll mx1[N], mx2[N], w[N], w1[N], w2[N];
 struct nade
 {
     int u, v, w;
@@ -48,6 +48,33 @@ void dfs3(int u, int tp)
         if (v ^ son[u])
             dfs3(v, v);
 }
+struct Bit
+{
+    ll c[N << 1];
+    void add(int x, ll w)
+    {
+        for (; x <= cnt; x += x & -x)
+            c[x] += w;
+    }
+    ll ask(int x)
+    {
+        ll rec = 0;
+        for (; x; x -= x & -x)
+            rec += c[x];
+        return rec;
+    }
+} T;
+void clear(int up)
+{
+    for (int i = 1; i <= up; i++)
+        T.c[i] = 0;
+}
+ll ask(int x) { return T.ask(x); }
+void upd(int l, int r, ll w)
+{
+    T.add(l, w);
+    T.add(r + 1, -w);
+}
 bool cmp(int x, int y) { return dfn[x] < dfn[y]; }
 int LCA(int u, int v)
 {
@@ -58,28 +85,6 @@ int LCA(int u, int v)
             u = fa[top[u]][0];
     return dep[u] < dep[v] ? u : v;
 }
-void change(int x, int l, int r, int L, int R, ll w)
-{
-    if (l >= L && r <= R)
-    {
-        t[x] += w;
-        return;
-    }
-    int mid = (l + r) >> 1;
-    if (mid >= L)
-        change(x << 1, l, mid, L, R, w);
-    if (mid + 1 <= R)
-        change(x << 1 | 1, mid + 1, r, L, R, w);
-}
-ll ask(int x, int l, int r, int p)
-{
-    if (l == r)
-        return t[x];
-    int mid = (l + r) >> 1;
-    if (mid >= p)
-        return ask(x << 1, l, mid, p) + t[x];
-    return ask(x << 1 | 1, mid + 1, r, p) + t[x];
-}
 void change(int u, int v, ll w)
 {
     if (u == 0)
@@ -87,19 +92,19 @@ void change(int u, int v, ll w)
         u = cnt;
         while (top[u] ^ top[v])
         {
-            change(1, 1, cnt, dfn[top[v]], dfn[v], w);
+            upd(dfn[top[v]], dfn[v], w);
             v = fa[top[v]][0];
         }
-        change(1, 1, cnt, 1, dfn[v], w);
+        upd(1, dfn[v], w);
         return;
     }
     while (top[u] ^ top[v])
     {
-        change(1, 1, cnt, dfn[top[v]], dfn[v], w);
+        upd(dfn[top[v]], dfn[v], w);
         v = fa[top[v]][0];
     }
     if (u ^ v)
-        change(1, 1, cnt, dfn[u] + 1, dfn[v], w);
+        upd(dfn[u] + 1, dfn[v], w);
 }
 void dfs1(int u, int col, int la)
 {
@@ -155,34 +160,22 @@ void make(int i, int u, int v)
 int find(int x) { return ff[x] == x ? x : ff[x] = find(ff[x]); }
 void init()
 {
-    memset(c, 0, sizeof c);
-    memset(w, 0, sizeof w);
-    memset(son, 0, sizeof son);
-    memset(fa, 0, sizeof fa);
-    memset(val, 0, sizeof val);
     for (int i = 1; i <= cnt; i++)
     {
         pos[i].clear();
         E[i].clear();
+        c[i] = w[i] = son[i] = 0;
     }
     cnt = 0;
     tot = 0;
-}
-void build(int x, int l, int r)
-{
-    t[x] = 0;
-    if (l == r)
-        return;
-    int mid = (l + r) >> 1;
-    build(x << 1, l, mid);
-    build(x << 1 | 1, mid + 1, r);
 }
 signed main()
 {
     // freopen("building.in","r",stdin);
     // freopen("building.out","w",stdout);
-    T = read<int>();
-    while (T--) {
+    int T = read<int>();
+    while (T--)
+    {
         n = read<int>();
         m = read<int>();
         q = read<int>();
@@ -207,7 +200,8 @@ signed main()
                 E[cnt].pb(u);
                 E[cnt].pb(v);
             }
-        build(1, 1, cnt);
+        clear(cnt);
+        fa[cnt][0] = val[cnt][0] = 0;
         dfs(cnt);
         dfs3(cnt, cnt);
         for (int i = 1; i <= n; i++)
@@ -237,7 +231,7 @@ signed main()
                 for (int i = 19; i >= 0; i--)
                     if (val[x][i] <= w && fa[x][i])
                         x = fa[x][i];
-                printf("%lld\n", ask(1, 1, cnt, dfn[x]));
+                printf("%lld\n", ask(dfn[x]));
             }
         }
         init();
