@@ -1,0 +1,1 @@
+{"name":"Local: farm","url":"/home/noilinux/下载/Codeset/Moudle/farm.cpp","tests":[{"id":1675852101668,"input":"3\n3 500\n2 200\n1 100\n1 1000\n3 700\n3 400","output":"1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/noilinux/下载/Codeset/Moudle/farm.cpp","group":"local","local":true}

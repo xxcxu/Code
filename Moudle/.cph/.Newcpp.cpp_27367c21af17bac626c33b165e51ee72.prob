@@ -1,0 +1,1 @@
+{"name":"Local: Newcpp","url":"/home/noilinux/下载/Codeset/Moudle/Newcpp.cpp","tests":[{"id":1675838514131,"input":"4 1\nmonika\ntomek\nszymon\nbernard","output":"5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/noilinux/下载/Codeset/Moudle/Newcpp.cpp","group":"local","local":true}
