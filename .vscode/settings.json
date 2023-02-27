@@ -116,9 +116,28 @@
     "rope": "cpp",
     "slist": "cpp"
   },
-  "C_Cpp.errorSquiggles": "Disabled",
+  "C_Cpp.errorSquiggles": "disabled",
   "cSpell.enableFiletypes": [
     "!cpp"
   ],
-  "cSpell.language": "en,en-GB,en-US"
+  "cSpell.language": "en,en-GB,en-US",
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "editor.inlayHints.fontFamily": "Consolas, 'Courier New', monospace",
+  "scm.inputFontFamily": "Consolas, 'Courier New', monospace",
+  "notebook.outputFontFamily": "Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
+  "editor.formatOnType": true,
+  "c-cpp-compile-run.output-location": "Output.txt",
+  "cph.general.useShortCodeForcesName": true,
+  "C_Cpp.autocomplete": "disabled",
+  "C_Cpp.autocompleteAddParentheses": true,
+  "editor.cursorStyle": "underline",
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true,
+  "terminal.integrated.cursorBlinking": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.mouseWheelZoom": true
 }

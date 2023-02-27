@@ -1,1 +1,0 @@
-{"name":"Local: P3665","url":"/home/noilinux/下载/Codeset/BZOJ/P3665.cpp","tests":[{"id":1675343782114,"input":"3 2 3 4\n1 2 3\n2 3 1\n1 1 2\n3 3\n2 3\n1 2\n2 2","output":"1\n3\n3\n1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/noilinux/下载/Codeset/BZOJ/P3665.cpp","group":"local","local":true}

@@ -1,1 +1,0 @@
-{"name":"Local: square","url":"/home/noilinux/下载/Codeset/NewHLOJ/square.cpp","tests":[{"id":1673138630249,"input":"3\n2 2\n3 3\n6 8","output":"3\n4\n11"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/noilinux/下载/Codeset/NewHLOJ/square.cpp","group":"local","local":true}

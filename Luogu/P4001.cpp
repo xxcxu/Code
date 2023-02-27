@@ -1,0 +1,133 @@
+# include <bits/stdc++.h>
+
+static const int inf = 0x3f3f3f3f;
+FILE *fin, *fout, *ferr;
+
+int n;
+int nn, mm;
+
+class MaxFlow {
+    static const int M = 3000005 * 2;
+
+public:
+    int s, t, cnt;
+    class Edge
+    {
+    public:
+        int to, link, next;
+        Edge(int to = 0, int link = 0, int next = 0) : to(to), link(link), next(next) {}
+    } e[M];
+#define ep emplace
+#define eb emplace_back
+    void init()
+    {
+        cnt = -1;
+        std::memset(head, -1, sizeof head);
+        return void();
+    }
+    void insert(int x, int y, int z)
+    {
+        e[++cnt] = Edge(y, z, head[x]);
+        head[x] = cnt;
+        return void();
+    }
+    void add_edge(int x, int y, int z)
+    {
+        insert(x, y, z);
+        insert(y, x, z);
+    }
+    int bfs()
+    {
+        std::queue<int> q;
+        std::memset(dep, 0, sizeof dep);
+        dep[s] = 1;
+        q.ep(s);
+        while (q.size())
+        {
+            int x = q.front();
+            q.pop();
+            for (int i = head[x]; ~i; i = e[i].next)
+            {
+                const int &y = e[i].to;
+                const int &z = e[i].link;
+                if ((dep[y] == 0) && (z > 0))
+                {
+                    dep[y] = dep[x] + 1;
+                    q.ep(y);
+                }
+            }
+        }
+        if (dep[t] > 0)
+            return true;
+        return false;
+    }
+    int dfs(int x, int d)
+    {
+        if (x == t)
+            return d;
+        for (int &i = cur[x]; ~i; i = e[i].next)
+        {
+            const int &y = e[i].to;
+            const int &z = e[i].link;
+            if ((dep[y] == dep[x] + 1) && z != 0)
+            {
+                int d2 = dfs(y, std::min(d, z));
+                if (d2 > 0)
+                {
+                    e[i].link -= d2;
+                    e[i ^ 1].link += d2;
+                    return d2;
+                }
+            }
+        }
+        return 0;
+    }
+    int dinic()
+    {
+        int ans = 0;
+        while (bfs())
+        {
+            for (int i = 0; i <= n + 1; ++i)
+                cur[i] = head[i];
+            while (int d = dfs(s, inf))
+                ans += d;
+        }
+        return ans;
+    }
+
+private:
+    int dep[M], cur[M], head[M];
+} Dinic;
+
+int get(int i, int j) {
+    return (i - 1) * mm + j;
+}
+
+signed main() {
+    fin = stdin, fout = stdout, ferr = stderr;
+    // fin = fopen("Input.txt", "r"), fout = fopen("Output.txt", "w+"), ferr = fopen("Debug.txt", "w+");
+    fscanf(fin, "%d%d", &nn, &mm);
+    n = nn * mm;
+    Dinic.init();
+    Dinic.s = 1, Dinic.t = n;
+    for (int i = 1; i <= nn; ++i)
+        for (int j = 1; j < mm; ++j) {
+            static int x;
+            fscanf(fin, "%d", &x);
+            Dinic.add_edge(get(i, j), get(i, j + 1), x);
+        }
+    for (int i = 1; i < nn; ++i)
+        for (int j = 1; j <= mm; ++j) {
+            static int x;
+            fscanf(fin, "%d", &x);
+            Dinic.add_edge(get(i, j), get(i + 1, j), x);
+        }
+    for (int i = 1; i < nn; ++i)
+        for (int j = 1; j < mm; ++j) {
+            static int x;
+            fscanf(fin, "%d", &x);
+            Dinic.add_edge(get(i, j), get(i + 1, j + 1), x);
+        }
+    fprintf(fout, "%d\n", Dinic.dinic());
+    return 0;
+}

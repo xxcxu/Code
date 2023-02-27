@@ -1,1 +1,0 @@
-{"name":"Local: ARMY FORMATIONS","url":"/home/noilinux/下载/Codeset/BZOJ/ARMY FORMATIONS.cpp","tests":[{"id":1675391028959,"input":"6\n2 5 2 6 6 6\n1 2\n1 6\n2 3\n3 4\n4 5","output":"78 41 24 18 6 6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/noilinux/下载/Codeset/BZOJ/ARMY FORMATIONS.cpp","group":"local","local":true}

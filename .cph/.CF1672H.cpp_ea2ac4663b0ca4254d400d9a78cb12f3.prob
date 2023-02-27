@@ -1,1 +1,0 @@
-{"name":"Local: CF1672H","url":"/home/noilinux/下载/Codeset/CF1672H.cpp","tests":[{"id":1675652422790,"input":"5 3\n11011\n2 4\n1 5\n3 5","output":"1\n3\n2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/noilinux/下载/Codeset/CF1672H.cpp","group":"local","local":true}

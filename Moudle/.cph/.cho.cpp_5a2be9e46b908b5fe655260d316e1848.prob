@@ -1,1 +1,0 @@
-{"name":"Local: cho","url":"/home/noilinux/下载/Codeset/Moudle/cho.cpp","tests":[{"id":1675836342868,"input":"4 1\nmonika\ntomek\nszymon\nbernard","output":"5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/noilinux/下载/Codeset/Moudle/cho.cpp","group":"local","local":true}
