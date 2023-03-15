@@ -38,6 +38,8 @@
   "files.exclude": {},
   "workspace.isHidden": true,
   "files.associations": {
+    "*.excalidraw": "json",
+    "*.excalidrawlib": "json",
     "cmath": "cpp",
     "any": "cpp",
     "array": "cpp",
@@ -114,7 +116,8 @@
     "variant": "cpp",
     "rb_tree": "cpp",
     "rope": "cpp",
-    "slist": "cpp"
+    "slist": "cpp",
+    "card": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "cSpell.enableFiletypes": [
@@ -126,18 +129,21 @@
   "scm.inputFontFamily": "Consolas, 'Courier New', monospace",
   "notebook.outputFontFamily": "Consolas, 'Courier New', monospace",
   "terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
-  "editor.formatOnType": true,
+  "editor.formatOnType": false,
   "c-cpp-compile-run.output-location": "Output.txt",
   "cph.general.useShortCodeForcesName": true,
   "C_Cpp.autocomplete": "disabled",
   "C_Cpp.autocompleteAddParentheses": true,
   "editor.cursorStyle": "underline",
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorBlinking": "smooth",
   "editor.smoothScrolling": true,
   "workbench.list.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.cursorBlinking": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "editor.mouseWheelZoom": true
+  "editor.mouseWheelZoom": true,
+  "C_Cpp_Runner.useAddressSanitizer": false,
+  "editor.formatOnSave": true,
+  "C_Cpp.formatting": "vcFormat"
 }

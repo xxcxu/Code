@@ -1,27 +1,42 @@
 #include <bits/stdc++.h>
-const int N = 5e2 + 5, mod = 1e9 + 7;
-int Rev(int x) {return (x % mod + mod) % mod;}
-int Add(int x, int y) {x = Rev(x), y = Rev(y); return (x + y) % mod;}
-void cAdd(int &x, int y) {x = Add(x, y);}
-int Mul(int x, int y) {x = Rev(x), y = Rev(y); return 1ll * x * y % mod;}
-void cMul(int &x, int y) {x = Mul(x, y);}
-int n, m, a[N], dp[2][N][N << 1];
-signed main() {
-	scanf("%d%d", &n, &m);
-	for(int i = 1; i <= n; i ++) scanf("%d", a + i);
-	std::sort(a + 1, a + 1 + n); dp[0][0][0] = 1;
-	for(int i = 0; i < n; i ++) {
-		int now = i & 1;
-		memset(dp[now ^ 1], 0, sizeof dp[now ^ 1]);
-		for(int j = 0; j <= n; j ++)
-			for(int k = 0; k <= m; k ++) {
-				int next = k; cAdd(next, 1ll * (a[i + 1] - a[i]) * j);
-                if (next > m || !dp[now][j][k]) continue;
-                cAdd(dp[now ^ 1][j + 1][next], dp[now][j][k]);
-                if (j) cAdd(dp[now ^ 1][j - 1][next], Mul(dp[now][j][k], j));
-                cAdd(dp[now ^ 1][j][next], Mul(dp[now][j][k], j + 1));
-			}   
-	} int ans = 0;
-    for (int i = 0; i <= m; ++i) cAdd(ans, dp[n & 1][0][i]);
-    return printf("%d\n", ans), 0;
+
+FILE *fin, *fout, *ferr;
+
+static const int N = 205, K = 1'005, P = 1'000'000'007;
+
+int n, k;
+int a[N], d[N], dp[N][N][K];
+
+int inc(int x, int y) { return (x + y) % P; }   
+int dec(int x, int y) { return (x + P - y) % P; }
+int mul(int x, int y) { return 1LL * x * y % P; }
+
+signed main()
+{
+    fin = stdin, fout = stdout, ferr = stderr;
+    // fin = fopen("input.in", "r"), fout = fopen("output.out", "w+"), ferr = fopen("debug.out", "w+");
+    fscanf(fin, "%d%d", &n, &k);
+    for (int i = 1; i <= n; ++i)
+        fscanf(fin, "%d", a + i);
+    std::sort(a + 1, a + n + 1);
+    for (int i = 1; i < n; ++i)
+        d[i] = a[i + 1] - a[i];
+    dp[0][0][0] = dp[0][1][0] = 1;
+    for (int i = 1; i < n; ++i)
+        for (int j = 0; j <= n; ++j)
+            for (int l = 0; l <= k; ++l)
+            {
+                if (j > 0 && l >= j * d[i])
+                    dp[i][j][l] = inc(dp[i][j][l], mul(j, dp[i - 1][j][l - j * d[i]]));
+                if (j < n && l >= (j + 1) * d[i])
+                    dp[i][j][l] = inc(dp[i][j][l], mul(j + 1, dp[i - 1][j + 1][l - (j + 1) * d[i]]));
+                if (j > 0 && l >= (j - 1) * d[i])
+                    dp[i][j][l] = inc(dp[i][j][l], dp[i - 1][j - 1][l - (j - 1) * d[i]]);
+                if (j >= 0 && l >= j * d[i])
+                    dp[i][j][l] = inc(dp[i][j][l], dp[i - 1][j][l - j * d[i]]);
+            }
+    int ans = 0;
+    for (int i = 0; i <= k; ++i)
+        ans = inc(ans, dp[n - 1][0][i]);
+    return fprintf(fout, "%d\n", ans), 0;
 }
